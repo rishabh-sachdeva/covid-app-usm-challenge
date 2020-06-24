@@ -1,1 +1,0 @@
-# covid-app-usm-challenge
