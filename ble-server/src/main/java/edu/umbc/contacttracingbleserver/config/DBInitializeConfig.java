@@ -26,6 +26,7 @@ public class DBInitializeConfig {
 			
 			String createQuery = "CREATE TABLE IF NOT EXISTS InfectedDetails("+
 								"public_key varchar(100) Primary Key, "+
+								"latitude decimal(9,6) not null, longitude decimal(9,6) not null"+
 								"time_stamp timestamp not null)";
 			System.out.println("Executing query - "+createQuery);
 			//statement.executeUpdate(createQuery);
