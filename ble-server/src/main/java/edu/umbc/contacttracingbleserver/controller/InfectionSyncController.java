@@ -20,9 +20,11 @@ public class InfectionSyncController {
 	@GetMapping("/allInfected")
 	private List<InfectedDetails> getInfectedIds(){
 		return inf_service.getAllInfectedIds();
-		
 	}
-	
+	@GetMapping("/allInfectedOneDay")
+	private List<InfectedDetails> getInfectedIdsLastDay(){
+		return inf_service.getIdsLast24h();
+	}
 	@PostMapping("/addInfected")
 	private String saveInfectedId(@RequestBody InfectedDetails detail) {
 		inf_service.addInfectedId(detail);
