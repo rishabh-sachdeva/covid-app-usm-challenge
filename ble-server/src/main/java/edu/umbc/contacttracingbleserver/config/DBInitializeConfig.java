@@ -25,7 +25,7 @@ public class DBInitializeConfig {
 			//statement.execute("DROP TABLE IF EXISTS InfectedDetails");
 			
 			String createQuery = "CREATE TABLE IF NOT EXISTS InfectedDetails("+
-								"public_key varchar(100) Primary Key, "+
+								"public_key BLOB Primary Key, "+
 								"time_stamp timestamp not null)";
 			System.out.println("Executing query - "+createQuery);
 			//statement.executeUpdate(createQuery);

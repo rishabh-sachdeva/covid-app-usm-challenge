@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.umbc.contacttracingbleserver.model.InfectedDetails;
+import edu.umbc.contacttracingbleserver.model.SucceessRes;
 import edu.umbc.contacttracingbleserver.service.InfectionService;
 
 @RestController  
@@ -19,15 +20,19 @@ public class InfectionSyncController {
 	
 	@GetMapping("/allInfected")
 	private List<InfectedDetails> getInfectedIds(){
+		System.out.println("GET Called**********");
 		return inf_service.getAllInfectedIds();
 	}
 	@GetMapping("/allInfectedOneDay")
 	private List<InfectedDetails> getInfectedIdsLastDay(){
+		System.out.println("GET ALL one day Called**********");
 		return inf_service.getIdsLast24h();
 	}
 	@PostMapping("/addInfected")
-	private String saveInfectedId(@RequestBody InfectedDetails detail) {
+	private SucceessRes saveInfectedId(@RequestBody InfectedDetails detail) {
+		System.out.println("POST Called********** with key: "+ detail.getPublic_key());
+		detail.setTime_stamp(System.currentTimeMillis());//set current time
 		inf_service.addInfectedId(detail);
-		return detail.getPublic_key();
+		return new SucceessRes(detail.getPublic_key());
 	}
 }

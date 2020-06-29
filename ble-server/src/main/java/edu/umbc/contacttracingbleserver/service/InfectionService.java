@@ -13,24 +13,34 @@ import edu.umbc.contacttracingbleserver.repository.InfectionRepository;
 
 @Service
 public class InfectionService {
-	
+
 	@Autowired
 	InfectionRepository repo;
-	
-	public List<InfectedDetails> getAllInfectedIds(){
+
+	public List<InfectedDetails> getAllInfectedIds() {
 		List<InfectedDetails> details = new ArrayList<InfectedDetails>();
 		repo.findAll().forEach(infD -> details.add(infD));
 		return details;
 	}
-	
-	public List<InfectedDetails> getIdsLast24h(){
+
+	/*
+	 * 
+	 * public List<InfectedDetails> getIdsLast24h(){ Calendar cal =
+	 * Calendar.getInstance(); List<InfectedDetails> details = new
+	 * ArrayList<InfectedDetails>(); cal.add(Calendar.DATE,-1);
+	 * System.out.println("FETCHING BY DATE");
+	 * repo.findAllWithTimestampAfter(cal.getTimeInMillis()).forEach(infD->details.
+	 * add(infD)); return details; }
+	 */
+	public List<InfectedDetails> getIdsLast24h() {
 		Calendar cal = Calendar.getInstance();
-		List<InfectedDetails> details = new ArrayList<InfectedDetails>();
-		cal.add(Calendar.DATE,-1);
+		List<InfectedDetails> details = new ArrayList<>();
+		cal.add(Calendar.DATE, -1);
 		System.out.println("FETCHING BY DATE");
-		repo.findAllWithTimestampAfter(cal.getTime()).forEach(infD->details.add(infD));
+		repo.findAllWithTimestampAfter(cal.getTimeInMillis()).forEach(infD -> details.add(infD));
 		return details;
 	}
+
 	public void addInfectedId(InfectedDetails detail) {
 		repo.save(detail);
 	}
